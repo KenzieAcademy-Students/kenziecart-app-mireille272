@@ -49,7 +49,7 @@ export default function CartItem({ item }) {
               <p className='price item-value'>{` $${item.price}`}</p>
             </Col>
           </Row>
-          <Row className='mb-2 align-items-center'>
+          <Row className='mb-2 align-items-center'> 
             <Col xs='6'>
               <p className='item-label'>quantity</p>
             </Col>
