@@ -6,7 +6,7 @@ const initialState = {
   cartTotal: 0,
 }
 
-const calculateCartTotal = (cartItems) => {
+ export const calculateCartTotal = (cartItems) => {
   let total = 0
 
   cartItems.map((item) => (total += item.price * item.quantity))
@@ -40,7 +40,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         cart: nextCart,
-        itemCount: state.itemCount + 1,
+        itemCount: state.itemCount + numItemsToAdd,
         cartTotal: calculateCartTotal(nextCart)
       }
     case 'REMOVE_ITEM':
