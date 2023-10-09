@@ -30,10 +30,11 @@ router
       orderTotal: orderTotal,
     }
     try {
+      const newOrder = await Order.create(orderData)
       /* create new order using Order model
         and return order ID
       */
-      res.json(orderData)
+      res.json(newOrder._id)
     } catch (error) {
       next(new Error('Error Placing Order'))
     }

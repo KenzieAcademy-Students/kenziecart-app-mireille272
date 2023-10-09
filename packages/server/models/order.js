@@ -9,7 +9,7 @@ const orderSchema = new mongoose.Schema(
     },
     customerEmail: {
       type: String,
-      required: true,
+      required: false,
     },
     customerAddress1: {
       type: String,
@@ -17,7 +17,7 @@ const orderSchema = new mongoose.Schema(
     },
     customerAddress2: {
       type: String,
-      required: true,
+      required: false,
     },
     items: [
       {
