@@ -21,7 +21,7 @@ const reducer = (state, action) => {
       const existingIndex = nextCart.findIndex(
         (item) => item._id === action.payload._id
       )
-
+   
       const numItemsToAdd = action.payload.quantity
 
       if (existingIndex >= 0) {
