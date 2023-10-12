@@ -1,23 +1,26 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import App from 'App'
-import { AppRouter } from 'AppRouter'
-import { ManagedUIContext } from 'hooks/useUI'
-import { ProvideCart } from 'hooks/useCart'
-import reportWebVitals from 'reportWebVitals'
-import './index.scss'
+import React from "react"
+import ReactDOM from "react-dom"
+import App from "App"
+import { AppRouter } from "AppRouter"
+import { ManagedUIContext } from "hooks/useUI"
+import { ProvideCart } from "hooks/useCart"
+import reportWebVitals from "reportWebVitals"
+import "./index.scss"
+import { CurrencyProvider } from "./hooks/UseCurrency"
 
 ReactDOM.render(
   <React.StrictMode>
     <ManagedUIContext>
-      <ProvideCart>
-        <AppRouter>
-          <App />
-        </AppRouter>
-      </ProvideCart>
+      <CurrencyProvider>
+        <ProvideCart>
+          <AppRouter>
+            <App />
+          </AppRouter>
+        </ProvideCart>
+      </CurrencyProvider>
     </ManagedUIContext>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 )
 
 // If you want to start measuring performance in your app, pass a function

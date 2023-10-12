@@ -22,34 +22,25 @@ function currencyReducer(state, action) {
   }
 }
 
-
 export const CurrencyProvider = (props) => {
   const [state, dispatch] = useReducer(currencyReducer, initialState)
 
   const currentCurrency = () => dispatch({ type: "SET_CURRENCY" })
-//   const euros = () => dispatch({ type: "SET_CURRENCY" })
-//   const toggleSidebar = () =>
-//     state.displaySidebar
-//       ? dispatch({ type: "CLOSE_SIDEBAR" })
-//       : dispatch({ type: "OPEN_SIDEBAR" })
-//   const closeSidebarIfPresent = () =>
-//     state.displaySidebar && dispatch({ type: "CLOSE_SIDEBAR" })
 
-//   const value = useMemo(
-//     () => ({
-//       ...state,
-//       dollars,
-//       euros,
-//       toggleSidebar,
-//       closeSidebarIfPresent,
-//     }),
-//     [state]
-//   )
+  const getPrice = (amount) => {
+    const currentPrice = amount * state.multiplier
+    return `${state.currencySymbol} ${currentPrice}`
+  }
 
-  return <CurrencyContext.Provider value={value} {...props} />
+  return (
+    <CurrencyContext.Provider
+      value={{ currencySymbol: state.currencySymbol, currentCurrency, getPrice }}
+      {...props}
+    />
+  )
 }
 
-const useCurrency = () => {
+export const useCurrency = () => {
   const context = useContext(CurrencyContext)
   if (context === undefined) {
     throw new Error(`useCurrency must be used within a UIProvider`)
@@ -57,11 +48,6 @@ const useCurrency = () => {
   return context
 }
 
-const getPrice = (amount) =>{
-    const currentPrice = state.cartTotal * state.multiplier
-    return `${state.currencySymbol} ${currentPrice}`
-}
-
 export const ManagedUIContext = ({ children }) => (
-  <UIProvider>{children}</UIProvider>
+  <CurrencyProvider>{children}</CurrencyProvider>
 )
