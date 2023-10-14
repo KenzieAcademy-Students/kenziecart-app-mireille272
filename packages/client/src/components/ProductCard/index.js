@@ -40,7 +40,7 @@ export default function ProductCard({ product }) {
                 <Link to={`p/${product._id}`}>{product.name}</Link>
               </Col>
               <Col className='text-right font-weight-bold'>
-                ${getPrice(product.price)}
+                {getPrice(product.price)}
               </Col>
             </Row>
           </Card.Title>
