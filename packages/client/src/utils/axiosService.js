@@ -15,6 +15,9 @@ const getProductById = (id) => {
   })
 }
 
+const veriyfyCoupon =(code) => {
+  return axios.get("/coupons/verify", {params: {code}})
+}
 const createOrder = (data) => {
   return axios.post('/orders', data)
 }
@@ -23,4 +26,4 @@ const findByName = (name) => {
   return axios.get(`/products?name=${name}`)
 }
 
-export { getAllProducts, getProductById, createOrder, findByName }
+export { getAllProducts, getProductById, createOrder, findByName, veriyfyCoupon}

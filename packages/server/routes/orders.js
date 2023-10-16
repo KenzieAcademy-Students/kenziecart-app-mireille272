@@ -28,6 +28,7 @@ router
       customerAddress2: address2,
       items: itemIdList,
       orderTotal: orderTotal,
+      coupon, 
     }
     try {
       const newOrder = await Order.create(orderData)

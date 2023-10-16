@@ -28,7 +28,7 @@ export const CurrencyProvider = (props) => {
   const currentCurrency = () => dispatch({ type: "SET_CURRENCY" })
 
   const getPrice = (amount) => {
-    const currentPrice = amount * state.multiplier
+    const currentPrice = amount * state.multiplier.toFixed()
     return `${state.currencySymbol} ${currentPrice}`
   }
 

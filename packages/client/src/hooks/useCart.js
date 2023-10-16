@@ -6,10 +6,12 @@ const initialState = {
   cartTotal: 0,
 }
 
-export const calculateCartTotal = (cartItems) => {
+export const calculateCartTotal = (cartItems, discount = 0) => {
   let total = 0
 
   cartItems.map((item) => (total += item.price * item.quantity))
+
+  total -= total * discount
 
   return parseFloat(total.toFixed(2))
 }
@@ -21,7 +23,7 @@ const reducer = (state, action) => {
       const existingIndex = nextCart.findIndex(
         (item) => item._id === action.payload._id
       )
-   
+
       const numItemsToAdd = action.payload.quantity
 
       if (existingIndex >= 0) {
@@ -104,6 +106,14 @@ const reducer = (state, action) => {
     case "INIT_SAVED_CART":
       return action.payload
 
+    case "APPLY_COUPON":
+      return {
+        ...state,
+        coupon: action.payload,
+        cartTotal: calculateCartTotal(nextCart.cart, action.payload.discount),
+      }
+    case "REMOVE_COUPON":
+      return { ...state, coupon: null, cartTotal: calculateCartTotal(nextCart) }
     default:
       return state
   }
@@ -164,6 +174,13 @@ const useProvideCart = () => {
     })
   }
 
+  const applyCoupon = (coupon) => {
+    dispatch({
+      type: "APPLY_COUPON",
+      payload: coupon,
+    })
+  }
+
   const isItemInCart = (id) => {
     return !!state.cart.find((item) => item._id === id)
   }
@@ -181,6 +198,7 @@ const useProvideCart = () => {
   return {
     state,
     addItem,
+    applyCoupon,
     removeItem,
     removeAllItems,
     resetCart,
