@@ -18,6 +18,7 @@ export default function CheckoutPage(props) {
 
   const placeOrder = async (orderFormData) => {
     console.log('handlePlaceOrder', orderFormData)
+
     let orderData = {
       customerDetails: orderFormData,
       items: state.cart,

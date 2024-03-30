@@ -17,7 +17,7 @@ const CartSidebarView = () => {
     closeSidebar()
     push("/checkout")
   }
-
+  console.log(state)
   return (
     <div className="cart">
       <header className="cart-header">
@@ -45,7 +45,7 @@ const CartSidebarView = () => {
 
       {state.cart.length > 0 && (
         <div className="cart-checkout">
-          <CartCoupon coupon={state.coupon} applyCoupon={applyCoupon} />
+          <CartCoupon coupon={state} applyCoupon={applyCoupon} />
 
           <CartSummary cartTotal={state.cartTotal} />
           <CheckoutBox

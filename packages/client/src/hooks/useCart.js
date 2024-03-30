@@ -9,6 +9,7 @@ const initialState = {
 export const calculateCartTotal = (cartItems, discount = 0) => {
   let total = 0
 
+  console.log(discount)
   cartItems.map((item) => (total += item.price * item.quantity))
 
   total -= total * discount
@@ -17,7 +18,10 @@ export const calculateCartTotal = (cartItems, discount = 0) => {
 }
 
 const reducer = (state, action) => {
+  console.log(action)
   let nextCart = [...state.cart]
+
+
   switch (action.type) {
     case "ADD_ITEM":
       const existingIndex = nextCart.findIndex(
@@ -109,8 +113,9 @@ const reducer = (state, action) => {
     case "APPLY_COUPON":
       return {
         ...state,
-        coupon: action.payload,
-        cartTotal: calculateCartTotal(nextCart.cart, action.payload.discount),
+        coupon: action.payload.codeName,
+        discount: action.payload.discount,
+        cartTotal: calculateCartTotal(nextCart, action.payload.discount),
       }
     case "REMOVE_COUPON":
       return { ...state, coupon: null, cartTotal: calculateCartTotal(nextCart) }
@@ -144,6 +149,7 @@ export const useCart = () => {
 }
 
 // Provider hook that creates cart object and handles state
+
 const useProvideCart = () => {
   const { state, dispatch } = useCart()
 
